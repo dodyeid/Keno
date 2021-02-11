@@ -26,7 +26,7 @@ $$\sum_{k=0}^{s}p(k,s)=1 $$
 
 Which leads to the fascinating statistical side note:
 
-$$\sum_{k=0}^{s}\frac{{\binom{s}{k}}{\binom{a-s}{b-k}}}{\binom{a}{b}} = 1 \text{ }\forall\text{ } a,b,s,k \in \mathbb{R}_{\ge0} \text{ s.t. }a \ge b \text{ and } s>k.$$
+$$\sum_{k=0}^{s}\frac{{\binom{s}{k}}{\binom{a-s}{b-k}}}{\binom{a}{b}} = 1 \text{ }\forall\text{ } a,b,s \in \mathbb{Z}_{\ge0} \text{ s.t. }a \ge b.$$
 
 Now, let $t(k,s)$ be defined as the Keno payout for matching $k$ numbers in an $s$-spot game. This is given on the website. 
 Let $W_s$ be a random variable defined as a player's winnings in an $s$-spot game, assuming they only wager $1 and play one draw. We can then calculate the expected value of this random variable like so:
