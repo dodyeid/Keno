@@ -18,11 +18,65 @@ $${80 \choose 20}$$
 Now, how many outcomes are successes? A success happens when I have exactly $k$ matches. So, of the 20 slots in an outcome, $k$ of them must be numbers I have chosen - no more and no less. Recall that I choose $s$ numbers in an $s$-spot game. So, there are ${s \choose k}$ ways of filling up my $k$ slots. Now, the remaining $20-k$ slots need to be filled with numbers that I did not pick. So, there are ${80 - s \choose 20 - k}$ ways of filling up the remaining slots. Therefore, the total number of outcomes that are successes is given by:
 $${s \choose k}{80-s \choose 20-k} $$
 So, the probability of matching exactly $k$ numbers in one $s$-spot game is:
-$$\frac{{s \choose k}{80-s \choose 20-k}}{80 \choose 20} $$
+$$p(k,s) = \frac{{s \choose k}{80-s \choose 20-k}}{80 \choose 20} $$
 
+If we pick some $s$, then we immediately have:
 
+$$\sum_{k=0}^{s}p(k,s)=1 $$
 
-```{r}
+Which leads to the fascinating statistical side note:
 
-```
+$$\sum_{k=0}^{s}\frac{{s \choose k}{a-s \choose b-k}}{a \choose b} = 1 \text{ }\forall\text{ } a,b,s,k \in \mathbb{R}_{\ge0} \text{ s.t. }a \ge b \text{ and } s>k.$$
 
+Now, let $t(k,s)$ be defined as the Keno payout for matching $k$ numbers in an $s$-spot game. This is given on the website. 
+Let $W_s$ be a random variable defined as a player's winnings in an $s$-spot game, assuming they only wager $1 and play one draw. We can then calculate the expected value of this random variable like so:
+
+$$\mathbb{E}(W_s) = \sum_{k=0}^{s}p(k,s)t(k,s) $$
+This value will henceforth be referred to as the "$s$-constant."
+
+Now, let's take into account two more choices a player makes: wager, $w$, and number of draws played, $d$. The total cost of playing the game to the player, as seen on the website, is simply $wd$ (ignore "Keno Plus" for now).
+If a player gets $k$ matches, he is paid $wt(k,s)$. So, his winnings is the random variable $wW_s$. If he plays $d$ times, his winnings is the random variable $wdW_s$. By linearity, we can say his expected winnings is:
+
+$$\mathbb{E}(wdW_s) = wd\mathbb{E}(W_s) $$
+
+So, his expected net winnings is given by:
+
+$$wd\mathbb{E}(W_s) - wd = wd(\mathbb{E}(W_s)-1) $$
+
+Now, a player must choose three things: wager, draws, and spots. So, the optimization problem is:
+
+$$\max_{w,d,s}[wd(\mathbb{E}(W_s)-1)] = \max_{w,d,s}[wd(\sum_{k=0}^{s}p(k,s)t(k,s) -1)]$$
+
+Notice that if the term inside the parentheses is positive, then the solution is to spend as much $w$ and play as many draws as possible. The suspicion, therefore, is that the inside term is negative for all $s$, otherwise the state would lose money. This is confirmed by calculation. In other words, for all possible values of $s$, the $s$-constant is less than 1:
+
+$$\sum_{k=0}^{s}p(k,s)t(k,s) < 1 \text{   } \forall \text{   } s \in \{1,...,12\} $$
+
+So, unsursingly, the expected net earnings of playing Keno is negative. Still, suppose you had to play the game because of social pressure. Which choices will then minimize my losses? We can immediately see the expected net earnings is maximized when $w$ and $d$ are the smallest possible, so each should equal one. The only thing that matters now is deciding how many spots to play. It turns out that, for New Hampshire Keno, the 5-spot game maximizes the $s$-constant at a value of 0.699932... 
+
+**Therefore, if forced to play this decisively losing game, only wager $1, play one draw, and pick the 5-spot game.**
+
+## Keno Plus
+But wait! What about the option to do Keno Plus? If someone decides to play Keno Plus, he must pay double, but his winnings can be multiplied by the Keno multiplier. The website lists the probability for each multiplier. Let $p_i$ be the probability that the multiplier $b_i$ is applied to a person's winnings. (Usually, $b_i = 1$). $i$ is just an index value: let there be $j$ possible multipliers.
+
+Now, the expected net earnings can be written as:
+
+$$\sum_{i=1}^{j}(p_ib_i(wd\mathbb{E}(W_s)) - 2wd = wd(\sum_{i=1}^{j}(p_ib_i(\mathbb{E}(W_s)) - 2)$$
+
+Recall that $\mathbb{E}(W_s)$ is the $s$-constant, and let's call it $S$. Our expected net earnings is therefore:
+
+$$wd(S\sum_{i=1}^{j}p_ib_i - 2) $$
+
+Let $\sum_{i=1}^{j}p_ib_i$ be called the "Keno Constant" and write it as $K$. For New Hampshire, that value is 2.004761905. 
+
+Let's do a quick proof by contradiction. If Keno Plus is better then not playing Keno Plus (on average), then we would have the identity:
+
+$$wd(SK - 2) > wd(S-1)$$
+$$\implies SK-2>S-1 $$
+$$\implies S(K-1) > 1 $$
+
+In New Hampshire, $K-1 > 0$, so this implies:
+
+$$S > \frac{1}{K-1} \implies S > 0.9952...$$
+
+But, in New Hampshire, $S \le 0.6999...$. We have a contradiction. 
+**So, if you play Keno, Keno plus leads to losing more money, on average, then not playing Keno plus.**
