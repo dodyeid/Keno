@@ -1,0 +1,28 @@
+---
+title: "Keno Analysis"
+author: "Dody Eid"
+date: "2/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Rules of NH Keno are here: https://www.nhlottery.com/Games/Keno-603
+
+First task of this paper is to assess the probability of getting $k$ matches when playing an $s$-spot game. 
+In standard Keno, 20 numbers are drawn from 80 numbers. Therefore, the total possibile combinations for one draw is:
+$${80 \choose 20}$$
+
+Now, how many outcomes are successes? A success happens when I have exactly $k$ matches. So, of the 20 slots in an outcome, $k$ of them must be numbers I have chosen - no more and no less. Recall that I choose $s$ numbers in an $s$-spot game. So, there are ${s \choose k}$ ways of filling up my $k$ slots. Now, the remaining $20-k$ slots need to be filled with numbers that I did not pick. So, there are ${80 - s \choose 20 - k}$ ways of filling up the remaining slots. Therefore, the total number of outcomes that are successes is given by:
+$${s \choose k}{80-s \choose 20-k} $$
+So, the probability of matching exactly $k$ numbers in one $s$-spot game is:
+$$\frac{{s \choose k}{80-s \choose 20-k}}{80 \choose 20} $$
+
+
+
+```{r}
+
+```
+
