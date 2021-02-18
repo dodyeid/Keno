@@ -17,18 +17,9 @@ $${\binom{80}{20}}$$
 
 Now, how many outcomes are successes? A success happens when I have exactly $k$ matches. So, of the 20 slots in an outcome, $k$ of them must be numbers I have chosen - no more and no less. Recall that I choose $s$ numbers in an $s$-spot game. So, there are ${s \choose k}$ ways of filling up my $k$ slots. Now, the remaining $20-k$ slots need to be filled with numbers that I did not pick. So, there are ${80 - s \choose 20 - k}$ ways of filling up the remaining slots. Therefore, the total number of outcomes that are successes is given by:
 $${\binom{s}{k}}{\binom{80-s}{20-k}} $$
-So, the probability of matching exactly $k$ numbers in one $s$-spot game is:
-$$p(k,s) = \frac{{\binom{s}{k}}{\binom{80-s}{20-k}}}{\binom{80}{20}} $$
-
-If we pick some $s$, then we immediately have:
-
-$$\sum_{k=0}^{s}p(k,s)=1 $$
-
-Which leads to the fascinating statistical side note:
-
-$$\sum_{k=0}^{s}\frac{{\binom{s}{k}}{\binom{a-s}{b-k}}}{\binom{a}{b}} = 1 \text{ }\forall\text{ } a,b,s \in \mathbb{Z}_{\ge0} \text{ s.t. }a \ge b.$$
-
-Now, let $t(k,s)$ be defined as the Keno payout for matching $k$ numbers in an $s$-spot game. This is given on the website. 
+Let $M_s$ be a random variable defined by number of matches in one $s$-spot game. The probability that $M_s = k$ is:
+$$P(M_s = k)= p(k,s) = \frac{{\binom{s}{k}}{\binom{80-s}{20-k}}}{\binom{80}{20}} $$
+The keen reader will note $M_s$ follows a hypergeometric distribution. Now, let $t(k,s)$ be defined as the Keno payout for matching $k$ numbers in an $s$-spot game. This is given on the Keno website. 
 Let $W_s$ be a random variable defined as a player's winnings in an $s$-spot game, assuming they only wager $1 and play one draw. We can then calculate the expected value of this random variable like so:
 
 $$\mathbb{E}(W_s) = \sum_{k=0}^{s}p(k,s)t(k,s) $$
