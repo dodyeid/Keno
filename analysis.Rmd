@@ -70,4 +70,4 @@ In New Hampshire, $K-1 > 0$, so this implies:
 $$S > \frac{1}{K-1} \implies S > 0.9952...$$
 
 But, in New Hampshire, $S \le 0.6999...$. We have a contradiction. 
-**So, if you play Keno, Keno plus leads to losing more money, on average, then not playing Keno plus.**
+**So, if you play Keno, Keno plus leads to worse outcomes, on average, than not playing Keno plus.**
